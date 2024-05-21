@@ -8,7 +8,7 @@ const Chat = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://opentemple.netlify.app/api/', { message: input });
+      const res = await axios.post('https://opentemple.netlify.app/.netlify/functions/chat', { message: input });
       console.log('Response:', res); // Add this line to log the response
       setResponse(res.data.response);
     } catch (error) {
