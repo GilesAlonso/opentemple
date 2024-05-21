@@ -6,7 +6,7 @@ exports.handler = async (event) => {
     console.log('Event:', event); // Add this line to log the event
     const { message } = JSON.parse(event.body);
 
-    const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GOOGLE_API_KEY}`, {
+    const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.YOUR_API_KEY}`, {
       contents: [
         {
           parts: [{ text: message }]
