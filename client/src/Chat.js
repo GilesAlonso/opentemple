@@ -9,9 +9,10 @@ const Chat = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/chat', { message: input });
+      console.log('Response:', res); // Add this line to log the response
       setResponse(res.data.response);
     } catch (error) {
-      console.error(error);
+      console.error('Error:', error);
     }
   };
 
