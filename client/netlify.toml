@@ -1,9 +1,9 @@
 [build]
   base = "client"
   publish = "build"
-  functions = "client/netlify/functions"
+  functions = "netlify/functions/api/"
 
 [[redirects]]
   from = "/api/*"
-  to = "/client/netlify/functions/api/:splat"
+  to = "/api/:splat"
   status = 200
