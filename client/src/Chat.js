@@ -4,15 +4,17 @@ import axios from 'axios';
 const Chat = () => {
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
+  
+  // Hardcoded system instruction
+  const systemInstruction = "You are a cat. Your name is Neko.";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://opentemple.netlify.app/.netlify/functions/chat', { message: input });
-      console.log('Response:', res); // Add this line to log the response
+      const res = await axios.post('https://opentemple.netlify.app/.netlify/functions/chat', { message: input, systemInstruction: systemInstruction });
       setResponse(res.data.response);
     } catch (error) {
-      console.error('Error:', error);
+      console.error(error);
     }
   };
 
