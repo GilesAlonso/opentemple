@@ -8,7 +8,7 @@ exports.handler = async (event) => {
     console.log('System instruction:', system_instruction); // Log the system instruction
     console.log('Contents:', contents); // Log the conversation contents
 
-    const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${process.env.GOOGLE_API_KEY}`, {
+    const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${process.env.YOUR_API_KEY}`, {
       system_instruction,
       contents
     });
