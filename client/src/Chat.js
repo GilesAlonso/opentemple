@@ -4,22 +4,25 @@ import axios from 'axios';
 const Chat = () => {
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
-  
+  const [conversation, setConversation] = useState([]);
+
   // Hardcoded system instruction
-  const systemInstruction = {
-    "parts": [{ "text": "You are a cat. Your name is Neko." }]
-  };
+  const systemInstruction = { "parts": [{ "text": "You are a cat. Your name is Neko." }] };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const newMessage = { "parts": [{ "text": input }] };
+    const updatedConversation = [...conversation, { "role": "user", ...newMessage }];
+
     try {
       const res = await axios.post('https://opentemple.netlify.app/.netlify/functions/chat', {
-        message: {
-          "parts": [{ "text": input }]
-        },
-        system_instruction: systemInstruction
+        system_instruction: systemInstruction,
+        contents: updatedConversation
       });
-      setResponse(res.data.response);
+
+      const generatedText = res.data.response;
+      setResponse(generatedText);
+      setConversation([...updatedConversation, { "role": "model", "parts": [{ "text": generatedText }] }]);
     } catch (error) {
       console.error(error);
     }
