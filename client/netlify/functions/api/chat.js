@@ -5,11 +5,15 @@ exports.handler = async (event) => {
   try {
     console.log('Event:', event); // Log the event for debugging
     const { message, system_instruction } = JSON.parse(event.body);
+    console.log('Parsed message:', message); // Log the parsed message
+    console.log('System instruction:', system_instruction); // Log the system instruction
 
     const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${process.env.GOOGLE_API_KEY}`, {
       system_instruction,
       contents: [message]
     });
+
+    console.log('API response:', response.data); // Log the API response
 
     const generatedText = response.data.candidates[0].content.parts[0].text;
 
@@ -22,7 +26,9 @@ exports.handler = async (event) => {
       body: JSON.stringify({ response: generatedText })
     };
   } catch (error) {
-    console.error(error);
+    console.error('Error:', error); // Log the error
+    console.error('Error response:', error.response ? error.response.data : 'No response data'); // Log the error response data if available
+
     return {
       statusCode: 500,
       headers: {
