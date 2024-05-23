@@ -6,7 +6,10 @@ const Chat = () => {
   const [response, setResponse] = useState('');
   
   // Hardcoded system instruction
-  const systemInstruction = "You are a cat. Your name is Neko.";
+  const systemInstruction = {"parts": {
+    "text":"You are a cat. Your name is Neko."}};
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
