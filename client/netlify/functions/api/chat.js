@@ -1,28 +1,17 @@
 const axios = require('axios');
 require('dotenv').config();
 
-let conversationHistory = ''; // Initialize conversation history
-
 exports.handler = async (event) => {
   try {
-    const { message } = JSON.parse(event.body);
+    console.log('Event:', event); // Log the event for debugging
+    const { message, system_instruction } = JSON.parse(event.body);
 
-    // Append the current message to the conversation history
-    conversationHistory += `\n${message}`;
-
-    const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.YOUR_API_KEY}`, {
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: conversationHistory }] // Include conversation history in the request
-        }
-      ]
+    const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${process.env.GOOGLE_API_KEY}`, {
+      system_instruction,
+      contents: [message]
     });
 
     const generatedText = response.data.candidates[0].content.parts[0].text;
-
-    // Update the conversation history with the generated text
-    conversationHistory += `\n${generatedText}`;
 
     return {
       statusCode: 200,
