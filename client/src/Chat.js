@@ -24,7 +24,7 @@ const Chat = () => {
       setResponse(generatedText);
       setConversation([...updatedConversation, { "role": "model", "parts": [{ "text": generatedText }] }]);
     } catch (error) {
-      console.error(error);
+      console.error('Error:', error); // Log the error in the frontend
     }
   };
 

@@ -27,7 +27,13 @@ exports.handler = async (event) => {
     };
   } catch (error) {
     console.error('Error:', error); // Log the error
-    console.error('Error response:', error.response ? error.response.data : 'No response data'); // Log the error response data if available
+    if (error.response) {
+      console.error('Error response:', error.response.data); // Log the error response data
+      console.error('Error status:', error.response.status); // Log the error status
+      console.error('Error headers:', error.response.headers); // Log the error headers
+    } else {
+      console.error('No response received from the API');
+    }
 
     return {
       statusCode: 500,
