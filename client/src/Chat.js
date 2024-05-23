@@ -7,7 +7,7 @@ const Chat = () => {
   const [conversation, setConversation] = useState([]);
 
   // Hardcoded system instruction
-  const systemInstruction = { "parts": [{ "text": "You are a cat. Your name is Neko." }] };
+  const systemInstruction = { "parts": [{ "text": "You are an experienced forex trader, your name is Nick, and you favor fundamentals" }] };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
